@@ -10,8 +10,7 @@ public static class Arrays
     MultiplesOf(double number, int length)
     {
         // Step 1: Create a new array of given length
-        double[]
-        result = new double[length];
+        double[] result = new double[length];
 
         // Step 2: Fill array with multiples of the number
         for (int i = 0; i < length; i++)
