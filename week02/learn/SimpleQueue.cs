@@ -1,4 +1,7 @@
-﻿public class SimpleQueue {
+﻿using System;
+using System.Collections.Generic;
+
+public class SimpleQueue {
     public static void Run() {
         // Test Cases
 
@@ -10,7 +13,7 @@
         queue.Enqueue(100);
         var value = queue.Dequeue();
         Console.WriteLine(value);
-        // Defect(s) Found:
+        // Defect(s) Found: None
 
         Console.WriteLine("------------");
 
@@ -28,7 +31,7 @@
         Console.WriteLine(value);
         value = queue.Dequeue();
         Console.WriteLine(value);
-        // Defect(s) Found: 
+        // Defect(s) Found: None
 
         Console.WriteLine("------------");
 
@@ -44,7 +47,7 @@
         catch (IndexOutOfRangeException) {
             Console.WriteLine("I got the exception as expected.");
         }
-        // Defect(s) Found: 
+        // Defect(s) Found: None
     }
 
     private readonly List<int> _queue = new();
@@ -53,21 +56,22 @@
     /// Enqueue the value provided into the queue
     /// </summary>
     /// <param name="value">Integer value to add to the queue</param>
-    private void Enqueue(int value) {
-        _queue.Insert(0, value);
+    public void Enqueue(int value) {
+        _queue.Insert(0, value); // Adds to the front
     }
 
     /// <summary>
     /// Dequeue the next value and return it
     /// </summary>
     /// <exception cref="IndexOutOfRangeException">If queue is empty</exception>
-    /// <returns>First integer in the queue</returns>
-    private int Dequeue() {
+    /// <returns>First integer in the queue (FIFO)</returns>
+    public int Dequeue() {
         if (_queue.Count <= 0)
             throw new IndexOutOfRangeException();
 
-        var value = _queue[1];
-        _queue.RemoveAt(1);
+        int lastIndex = _queue.Count - 1;
+        var value = _queue[lastIndex]; // Get the last item (oldest)
+        _queue.RemoveAt(lastIndex);    // Remove the last item
         return value;
     }
 }
