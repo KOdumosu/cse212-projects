@@ -18,13 +18,39 @@
             65
         ];
 
-        Console.WriteLine($"Number of items in the collection: {data.Length}");
-        Console.WriteLine($"Number of duplicates : {CountDuplicates(data)}");
+          Console.WriteLine($"Number of items in the collection: {data.Length}");
+        Console.WriteLine($"Number of duplicates: {CountDuplicates(data)}");
+        Console.WriteLine($"Number of duplicates (alternate): {CountDuplicatesAlternate(data)}");
     }
 
+    /// <summary>
+    /// Loop through the data, check for membership in the set.
+    /// If yes, then increase the counter; otherwise, add it to the set.
+    /// </summary>
     private static int CountDuplicates(int[] data)
     {
         // Add code here.
-        return 0;
+        var unique = new HashSet<int>();
+        var duplicates = 0;
+
+        foreach (var x in data)
+        {
+            if (unique.Contains(x))
+                duplicates++;
+            else
+                unique.Add(x);
+        }
+
+        return duplicates;
+    }
+
+    /// <summary>
+    /// Add everything in the data to the set. Duplicates will be automatically ignored.
+    /// Subtract the length of the set from the length of the data.
+    /// </summary>
+    private static int CountDuplicatesAlternate(int[] data)
+    {
+        var unique = new HashSet<int>(data);
+        return data.Length - unique.Count;
     }
 }
