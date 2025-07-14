@@ -1,18 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-public class Person
-{
-    public string Name { get; private set; }
-    public int Turns { get; set; }
-
-    public Person(string name, int turns)
-    {
-        Name = name;
-        Turns = turns;
-    }
-}
-
 public class TakingTurnsQueue
 {
     private Queue<Person> queue = new Queue<Person>();
@@ -34,14 +22,11 @@ public class TakingTurnsQueue
 
         var person = queue.Dequeue();
 
-        // Determine if this person has infinite turns
         bool infiniteTurns = person.Turns <= 0;
 
-        // For finite turns, decrement and requeue if > 1
         if (!infiniteTurns)
         {
             person.Turns--;
-
             if (person.Turns > 0)
             {
                 queue.Enqueue(person);
@@ -49,7 +34,7 @@ public class TakingTurnsQueue
         }
         else
         {
-            queue.Enqueue(person); // infinite turns, always requeue
+            queue.Enqueue(person);
         }
 
         return person;

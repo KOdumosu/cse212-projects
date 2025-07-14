@@ -1,9 +1,10 @@
+// Person.cs
 public class Person
 {
-    public readonly string Name;
+    public string Name { get; private set; }
     public int Turns { get; set; }
 
-    internal Person(string name, int turns)
+    public Person(string name, int turns)
     {
         Name = name;
         Turns = turns;
@@ -11,6 +12,6 @@ public class Person
 
     public override string ToString()
     {
-        return Turns <= 0 ? $"({Name}:Forever)" : $"({Name}:{Turns})";
+        return $"{Name} ({Turns})";
     }
 }
